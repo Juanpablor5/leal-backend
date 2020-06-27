@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "485f5d02-15c8-45ec-bb0d-a5566d605096",
+		"name": "leal-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registrar usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "Json de entrada a través del body.",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Juan Pablo\",\r\n    \"lastname\": \"Rocha\",\r\n    \"birth_date\": \"5/08/1996\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"hola123\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/users/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"signup"
+					]
+				},
+				"description": "Registra al usuario con los datos proporcionados en el body"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios registrados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/users/get",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"get"
+					]
+				},
+				"description": "Devuelve un Json con todos los usuarios registrados, con su id, nombre, apellido e email."
+			},
+			"response": []
+		},
+		{
+			"name": "Iniciar sesión",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"description": "Json de entrada a través del body."
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"hola123\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/users/login",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"login"
+					]
+				},
+				"description": "Inicia la sesión del usuario con los datos proporcionados en el body. Retorna el token de inicio de sesión que habilitará las peticiones de registro de transacciones, inactivar transacción y ver puntos y transacciones del usuario."
+			},
+			"response": []
+		},
+		{
+			"name": "Transacciones del usuario",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "",
+						"type": "text",
+						"description": "Token de acceso generado al iniciar sesión."
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/users/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"transactions"
+					]
+				},
+				"description": "Retorna todas las transacciones del usuario que ha iniciado sesión y que ha proporcionado el token de acceso en el header."
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar transacción",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "Json de entrada a través del body.",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "",
+						"description": "Token de acceso generado al iniciar sesión.",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 15000.00\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/users/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"transactions"
+					]
+				},
+				"description": "Registra una transacción al usuario que ha iniciado sesión y que proporciona el token de acceso en el header."
+			},
+			"response": []
+		},
+		{
+			"name": "Puntos del usuario",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "",
+						"description": "Token de acceso generado al iniciar sesión.",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/users/points",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"points"
+					]
+				},
+				"description": "Retorna los puntos del usuario con transacciones activas."
+			},
+			"response": []
+		},
+		{
+			"name": "Inactivar transacción",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "Json de entrada a través del body.",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "",
+						"description": "Token de acceso generado al iniciar sesión.",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": 0\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/users/transactions/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"transactions",
+						"1"
+					]
+				},
+				"description": "Inactiva la transacción del id que le ingresa por parámetro en la URL. Para lograr esto se debe enviar el token de acceso del usuario que ha iniciado sesión y sólo podrá editar sus transacciones."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
